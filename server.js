@@ -19,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useUnifiedTopology: true
 });
 
+//mongodb+srv://dalto135:biscuitbill@cluster0.kl0bn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 // routes
 app.use(require("./public/api.js"));
 

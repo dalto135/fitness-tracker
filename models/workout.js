@@ -35,7 +35,7 @@ const workoutSchema = new Schema({
                 type: Number,
                 required: 'Enter an amount'
             }
-        }
+        },
     ]
 });
 

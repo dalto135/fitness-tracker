@@ -46,3 +46,4 @@ const API = {
 };
 
 module.exports = router;
+// exports.API = API;

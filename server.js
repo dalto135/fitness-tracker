@@ -16,7 +16,8 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 //mongodb+srv://dalto135:biscuitbill@cluster0.kl0bn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority

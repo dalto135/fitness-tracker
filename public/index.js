@@ -1,3 +1,5 @@
+// const API = require('./api');
+
 init();
 
 async function init() {
@@ -11,3 +13,4 @@ async function init() {
   }
 }
 
+// module.exports = { API };

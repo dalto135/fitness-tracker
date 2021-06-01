@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
 //mongodb+srv://dalto135:biscuitbill@cluster0.kl0bn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 // routes
-app.use(require("./public/api.js"));
+app.use(require("./routes/api"));
 
 app.listen(PORT, () => {
   console.log(`App running on http://localhost:${PORT}`);

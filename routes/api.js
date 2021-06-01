@@ -14,6 +14,7 @@ const Workout = require("../models/workout.js");
 //db.workout.aggregate({$addFields: {totalDuration: {$sum: "$exercises.duration"}}}).pretty()
 
 router.get('/api/workouts', (req, res) => {
+  console.log('get api/workouts');
     Workout.aggregate({$addFields: {totalWeight: {$sum: "$exercises.weight"}}}).pretty()
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -24,6 +25,7 @@ router.get('/api/workouts', (req, res) => {
 });
 
 router.put('/api/workouts/:id', ({ body }, res) => {
+  console.log('put api/workouts/:id');
     Workout.updateOne(body)
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -34,6 +36,7 @@ router.put('/api/workouts/:id', ({ body }, res) => {
 });
 
 router.post('/api/workouts', ({ body }, res) => {
+  console.log('post api/workouts');
     Workout.create(body)
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -44,6 +47,7 @@ router.post('/api/workouts', ({ body }, res) => {
 });
 
 router.get('/api/workouts/range', (req, res) => {
+  console.log('get api/workouts/range');
     Workout.aggregate({$addFields: {totalDuration: {$sum: "$exercises.duration"}}}).pretty()
       .then(dbWorkout => {
         res.json(dbWorkout);

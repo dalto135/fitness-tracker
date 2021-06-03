@@ -28,6 +28,8 @@ router.get('/api/workouts', (req, res) => {
   console.log(req.body);
     Workout.create(req.body)
     .then(workout => {
+      console.log('workout:');
+      console.log(workout);
       res.json(workout);
     })
     .catch(err => {
@@ -50,6 +52,8 @@ router.put('/api/workouts/:id', ({ body }, res) => {
   console.log(body);
     Workout.updateOne(body)
       .then(workout => {
+        console.log('workout:');
+        console.log(workout);
         res.json(workout);
       })
       .catch(err => {
@@ -72,6 +76,8 @@ router.post('/api/workouts', ({ body }, res) => {
   console.log(body);
     Workout.create(body)
     .then(workout => {
+      console.log('workout:');
+      console.log(workout);
       res.json(workout);
     })
     .catch(err => {
@@ -92,13 +98,28 @@ router.post('/api/workouts', ({ body }, res) => {
 router.get('/api/workouts/range', (req, res) => {
   console.log('get api/workouts/range');
   console.log(req.body);
-    Workout.create(req.body)
-    .then(workout => {
-      res.json(workout);
-    })
-    .catch(err => {
-      res.status(400).json(err.message);
-    });
+    
+  Workout.aggregate(
+    [
+      {
+        $group: {
+          Workout: "$type",
+          total: {
+            $sum: "$duration"
+          }
+        }
+      }
+    ],
+    function(err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log('result:')
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
 });
 
 module.exports = router;

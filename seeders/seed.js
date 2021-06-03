@@ -20,6 +20,14 @@ const workoutSeed = [
         reps: 10,
         sets: 4,
       },
+      {
+        type: 'resistance',
+        name: 'YEEEEEEEE',
+        duration: 40,
+        weight: 100,
+        reps: 10,
+        sets: 4,
+      }
     ],
   },
   {

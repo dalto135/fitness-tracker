@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { db } = require('../models/workout.js');
 const Workout = require("../models/workout.js");
 
 //Add new workout
@@ -13,22 +14,14 @@ const Workout = require("../models/workout.js");
 //Get total duration of workout
 //db.workout.aggregate({$addFields: {totalDuration: {$sum: "$exercises.duration"}}}).pretty()
 
-// router.get('/api/workouts', (req, res) => {
-//   console.log('get api/workouts');
-//     Workout.aggregate({$addFields: {totalWeight: {$sum: "$exercises.weight"}}}).pretty()
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//         res.status(400).json(err.message);
-//       });
-// });
+//Retrieve information of all workouts
 router.get('/api/workouts', (req, res) => {
   console.log('get api/workouts');
   console.log(req.body);
-    Workout.create(req.body)
+    Workout.find({})
     .then(workout => {
       console.log('workout:');
+      // console.log(workout[0].exercises);
       console.log(workout);
       res.json(workout);
     })
@@ -37,20 +30,12 @@ router.get('/api/workouts', (req, res) => {
     });
 });
 
-// router.put('/api/workouts/:id', ({ body }, res) => {
-//   console.log('put api/workouts/:id');
-//     Workout.updateOne(body)
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//           res.status(400).json(err.message);
-//       })
-// });
+//Add exercise to existing workout
 router.put('/api/workouts/:id', ({ body }, res) => {
   console.log('put api/workouts/:id');
   console.log(body);
-    Workout.updateOne(body)
+  const id = '60b9242f5e74b23365a68368';
+    Workout.updateOne({_id: id}, {exercises: body})
       .then(workout => {
         console.log('workout:');
         console.log(workout);
@@ -61,16 +46,7 @@ router.put('/api/workouts/:id', ({ body }, res) => {
       })
 });
 
-// router.post('/api/workouts', ({ body }, res) => {
-//   console.log('post api/workouts');
-//     Workout.create(body)
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//         res.status(400).json(err.message);
-//       });
-// });
+//Create new workout
 router.post('/api/workouts', ({ body }, res) => {
   console.log('post api/workouts');
   console.log(body);
@@ -85,41 +61,20 @@ router.post('/api/workouts', ({ body }, res) => {
     });
 });
 
-// router.get('/api/workouts/range', (req, res) => {
-//   console.log('get api/workouts/range');
-//     Workout.aggregate({$addFields: {totalDuration: {$sum: "$exercises.duration"}}}).pretty()
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//         res.status(400).json(err.message);
-//       });
-// });
+//Retrieve information of all workouts with the calculated total duration of each workout
 router.get('/api/workouts/range', (req, res) => {
   console.log('get api/workouts/range');
-  console.log(req.body);
-    
-  Workout.aggregate(
-    [
-      {
-        $group: {
-          Workout: "$type",
-          total: {
-            $sum: "$duration"
-          }
-        }
-      }
-    ],
+  Workout.aggregate([{$addFields: {totalDuration: {$sum: "$exercises.duration"}}}],
     function(err, result) {
       if (err) {
-        res.send(err);
+        res.send(err.message);
       } else {
         console.log('result:')
         console.log(result);
         res.json(result);
       }
     }
-  );
+  )
 });
 
 module.exports = router;

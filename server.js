@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require('morgan');
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -19,8 +19,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useUnifiedTopology: true,
   useCreateIndex: true
 });
-
-//mongodb+srv://dalto135:biscuitbill@cluster0.kl0bn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 // routes
 app.use(require("./routes/api"));

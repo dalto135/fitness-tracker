@@ -6,6 +6,11 @@ async function initWorkout() {
       .querySelector("a[href='/exercise?']")
       .setAttribute("href", `/exercise?id=${lastWorkout._id}`);
 
+      //
+      console.log('lastWorkout');
+      console.log(lastWorkout);
+      //
+
     const workoutSummary = {
       date: formatDate(lastWorkout.day),
       totalDuration: lastWorkout.totalDuration,
@@ -63,6 +68,12 @@ function renderWorkoutSummary(summary) {
 
     strong.textContent = workoutKeyMap[key];
     const textNode = document.createTextNode(`: ${summary[key]}`);
+    //
+    console.log('summary');
+    console.log(summary);
+    console.log('textNode');
+    console.log(textNode);
+    //
 
     p.appendChild(strong);
     p.appendChild(textNode);

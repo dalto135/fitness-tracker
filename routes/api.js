@@ -18,7 +18,7 @@ const Workout = require("../models/workout.js");
 router.get('/api/workouts', (req, res) => {
   console.log('get api/workouts');
   console.log(req.body);
-  
+
     Workout.find({})
     .then(workout => {
       console.log('workout:');
@@ -69,7 +69,8 @@ router.post('/api/workouts', (req, res) => {
 router.get('/api/workouts/range', (req, res) => {
   console.log('get api/workouts/range');
 
-  Workout.aggregate([{$addFields: {totalDuration: {$sum: "$exercises.duration"}}}],
+  Workout.aggregate([{$addFields: {totalDuration: {$sum: "$exercises.duration"}, totalWeight: {$sum: "$exercises.weight"}} }],
+  // {totalWeight: {$sum: "exercises.weight"}}
     function(err, result) {
       if (err) {
         res.send(err.message);

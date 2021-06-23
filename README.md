@@ -27,4 +27,4 @@ A webpage that allows the user to keep track of the workouts they have completed
 MIT
 
 ## Contact
-Dalton Wilkins - wilkins.271@osu.edu
+Dalton Wilkins - daltongh@gmail.com
